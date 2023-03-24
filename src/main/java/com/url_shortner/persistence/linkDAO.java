@@ -26,6 +26,21 @@ public class linkDAO extends DAO {
 		}
 	}
 	
+	private boolean create(String url) throws Exception {
+		try {
+			open();
+			stmt = con.prepareStatement(INSERT);
+			stmt.setString(1, url);
+			return stmt.execute();
+		} catch (Exception err) {
+			return false;
+		} finally {
+			close();
+		}
+		
+		
+	}
+	
 	public static void main(String[] args) {
 		try {
 			linkDAO ldao = new linkDAO();
@@ -36,4 +51,6 @@ public class linkDAO extends DAO {
 			System.out.println(e.getMessage());
 		}
 	}
+
+	
 }
