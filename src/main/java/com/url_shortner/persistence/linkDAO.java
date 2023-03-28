@@ -1,21 +1,20 @@
 package com.url_shortner.persistence;
 
+import java.util.List;
+
 public class linkDAO extends DAO {
 	private static final String INSERT = "insert into tb_link(url, code, insert_date) values(?,(select substr(to_base64((select count(1) as total from tb_link l)),1,7) ), sysdate());";
 	private static final String UPDATE = "update tb_link set custom = 'brunogusmao' where id=1;";
 	private static final String FIND_ALL = "select id, url, code, custom from tb_link;";
-	public void findAll()throws Exception{
+	public List<LinkBean> findAll()throws Exception{
+		List<LinkBean> links = null;
 		try {
 			open();
 			stmt = con.prepareStatement(FIND_ALL);
 			rs = stmt.executeQuery();	
 			while(rs.next()) {
-				System.out.print("++++++++++++++");
-				System.out.print("Id = "+rs.getInt("id"));
-				System.out.print("URL = "+rs.getInt("url"));
-				System.out.print("Code= "+rs.getInt("code"));
-				System.out.print("Custom = "+rs.getInt("custom"));
-				System.out.print("++++++++++++++");
+				links.add(new LinkBean(rs.getInt("id"), rs.getString("url"),
+						rs.getString("Code"), rs.getString("custom")));
 			}
 			//stmt.setString(1, url);
 			//return stmt.execute();
@@ -25,6 +24,7 @@ public class linkDAO extends DAO {
 		} finally {
 			close();
 		}
+		return links;
 	}
 	
 	private boolean create(String url) throws Exception {
