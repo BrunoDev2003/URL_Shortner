@@ -27,7 +27,7 @@ public class linkDAO extends DAO {
 		return links;
 	}
 	
-	private boolean create(String url) throws Exception {
+	public boolean create(String url) throws Exception {
 		try {
 			open();
 			stmt = con.prepareStatement(INSERT);
