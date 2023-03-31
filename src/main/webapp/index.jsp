@@ -1,3 +1,5 @@
+<%@taglib uri="" prefix="c" %>
+
 <%@page import="com.url_shortner.persistence.LinkBean"%>
 <%@page import="com.url_shortner.persistence.linkDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -16,7 +18,7 @@
 			<input type="url" required="required" name="url" placeholder="url">
 			<input type="submit" value="Create URL" />
 		</form>
-		
+		<c:out value="${msg }"></c:out>
 		<table border="1">
 			<thead>
 				<tr>
@@ -27,21 +29,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<%
-					
-					linkDAO linkDAO = new linkDAO();
-					for(LinkBean link: linkDAO.findAll()){
-						out.print("<tr>");
-						out.print("<td>"+link.getId()+"</td>");
-						out.print("<td>"+link.getUrl()+"</td>");
-						out.print("<td>"+link.getCode()+"</td>");
-						out.print("<td>"+link.getCustom()+"</td>");
-						out.print("</tr>");
-						
-						
-					}
 				
-				%>
+				<c:forEach items=""></c:forEach>
+				
+				
 			</tbody>
 		</table>
 	</div>
