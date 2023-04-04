@@ -1,5 +1,5 @@
 <%@taglib uri="" prefix="c" %>
-
+<jsp:useBean id="linkViewer" class="com.url_shortner.view.LinkViewer"></jsp:useBean>
 <%@page import="com.url_shortner.persistence.LinkBean"%>
 <%@page import="com.url_shortner.persistence.linkDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -30,7 +30,14 @@
 			</thead>
 			<tbody>
 				
-				<c:forEach items=""></c:forEach>
+				<c:forEach items="${linkViewer.getLinks }" var="link">
+					<tr>
+						<td>${link.getId() }</td>
+						<td>${link.getCustom() }</td>
+						<td>${link.getCode() }</td>
+						<td>${link.getUrl() }</td>
+					</tr>
+				</c:forEach>
 				
 				
 			</tbody>
