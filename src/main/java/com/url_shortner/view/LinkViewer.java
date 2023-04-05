@@ -2,18 +2,22 @@ package com.url_shortner.view;
 
 import java.util.List;
 
+import com.url_shortner.persistence.linkDAO;
+
 public class LinkViewer {
 	
 	
 	public List<LinkBean>getLinks() {
+		List<LinkBean> links = null;
 		
 		try {
-			LinkDAO linkdao = new LinkDAO();
-			linkdao = linkdao.findAll();
+			linkDAO linkdao = new linkDAO();
+			linkdao = (linkDAO) linkdao.findAll();
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println(e.getMessage());
 		}
 		
-		return linkdao;
+		return links;
 	}
 }

@@ -30,11 +30,11 @@
 			</thead>
 			<tbody>
 				
-				<c:forEach items="${linkViewer.getLinks }" var="link">
+				<c:forEach items="${linkViewer.getLinks() }" var="link">
 					<tr>
 						<td>${link.getId() }</td>
 						<td>${link.getCustom() }</td>
-						<td>${link.getCode() }</td>
+						<td><a href="http://localhost:8080/url_short/${link.getCode()}"></a></td>
 						<td>${link.getUrl() }</td>
 					</tr>
 				</c:forEach>
