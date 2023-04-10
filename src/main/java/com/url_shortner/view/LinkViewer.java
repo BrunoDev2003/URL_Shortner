@@ -20,4 +20,20 @@ public class LinkViewer {
 		
 		return links;
 	}
+	
+	public LinkBean getLinkByCode(String code) {
+		LinkBean links = null;
+		
+		try {
+			linkDAO linkdao = new linkDAO();
+			links = linkDAO.getLinkByCode(code);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		
+		return links;
+	}
+	
+	
 }

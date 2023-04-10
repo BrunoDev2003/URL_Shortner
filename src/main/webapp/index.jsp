@@ -29,6 +29,10 @@
 				</tr>
 			</thead>
 			<tbody>
+			
+			<c:if test="${code!=null }">
+				<c:redirect url="${linkViewer.getLinkByCode(param.code).getUrl()}"></c:redirect>
+			</c:if>
 				
 				<c:forEach items="${linkViewer.getLinks() }" var="link">
 					<tr>
