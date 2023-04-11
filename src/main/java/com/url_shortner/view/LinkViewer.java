@@ -35,5 +35,19 @@ public class LinkViewer {
 		return links;
 	}
 	
+	public LinkBean getLinkByCustom(String custom) {
+		LinkBean links = null;
+		
+		try {
+			linkDAO linkdao = new linkDAO();
+			links = linkDAO.getLinkByCustom(custom);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		
+		return links;
+	}
+	
 	
 }

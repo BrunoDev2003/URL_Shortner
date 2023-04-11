@@ -43,6 +43,9 @@
 					</tr>
 				</c:forEach>
 				
+				//TODO: fazer metodo que verifica se o código é um código url, 
+				ou um código custom, usando uma query só.
+				
 				
 			</tbody>
 		</table>

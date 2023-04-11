@@ -6,7 +6,8 @@ public class linkDAO extends DAO {
 	private static final String INSERT = "insert into tb_link(url, code, insert_date) values(?,(select substr(to_base64((select count(1) as total from tb_link l)),1,7) ), sysdate());";
 	private static final String UPDATE = "update tb_link set custom = 'brunogusmao' where id=1;";
 	private static final String FIND_ALL = "select id, url, code, custom from tb_link;";
-	private static final String GET_LINK_BY_CODE = "select id, url, code, custom from tb_link where code = ?";
+	private static final String GET_LINK_BY_CODE = "select id, url, code, custom from tb_link where code = ? or custom = ?";
+	private static final String GET_LINK_BY_CUSTOM = "select id, url, code, custom from tb_link where custom = ?";
 	public List<LinkBean> findAll()throws Exception{
 		List<LinkBean> links = null;
 		try {
@@ -34,6 +35,7 @@ public class linkDAO extends DAO {
 			open();
 			stmt = con.prepareStatement(GET_LINK_BY_CODE);
 			stmt.setString(1, code);
+			stmt.setString(2, code);
 			rs = stmt.executeQuery();	
 			if(rs.next()) {
 				 links = new LinkBean(rs.getInt("id"), rs.getString("url"),
@@ -91,6 +93,28 @@ public class linkDAO extends DAO {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
+	}
+
+	public LinkBean getLinkByCustom(String custom)throws Exception{
+		LinkBean links = null;
+		try {
+			open();
+			stmt = con.prepareStatement(GET_LINK_BY_CUSTOM);
+			stmt.setString(1, custom);
+			rs = stmt.executeQuery();	
+			if(rs.next()) {
+				 links = new LinkBean(rs.getInt("id"), rs.getString("url"),
+						rs.getString("Code"), rs.getString("custom"));
+			}
+			//stmt.setString(1, url);
+			//return stmt.execute();
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+			//return false;
+		} finally {
+			close();
+		}
+		return links;
 	}
 
 	
